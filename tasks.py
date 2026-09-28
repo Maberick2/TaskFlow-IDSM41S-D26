@@ -168,3 +168,25 @@ def delete_task(tasks, task_id):
             return
 
     print("Error: ID no encontrado")
+
+def search_tasks(tasks, text):
+    """Busca tareas por nombre sin distinguir mayúsculas y minúsculas."""
+    text = text.strip()
+
+    if not text:
+        print("Escribe un texto para buscar.")
+        return
+
+    matches = [
+        task for task in tasks
+        if text.casefold() in task[KEY_TITLE].casefold()
+    ]
+
+    if not matches:
+        print("No se encontraron tareas con ese nombre.")
+        return
+
+    print("\nResultados de la búsqueda:")
+    for task in matches:
+        status = "Completada" if task[KEY_COMPLETED] else "Pendiente"
+        print(f"{task[KEY_ID]}. {task[KEY_TITLE]} [{status}]")

@@ -2,7 +2,8 @@ from tasks import (
     add_task,
     list_tasks,
     complete_task,
-    delete_task
+    delete_task,
+    search_tasks
 )
 from storage import load_tasks, save_tasks
 from utils import show_menu
@@ -23,7 +24,7 @@ def main():
             continue
 
         #  Validar rango de opciones
-        if option not in ["1", "2", "3", "4", "5"]:
+        if option not in ["1", "2", "3", "4", "5", "6"]:
             print("Error: Opción fuera de rango.")
             continue
 
@@ -52,6 +53,10 @@ def main():
                 print("ID inválido. Debe ser un número.")
 
         elif option == "5":
+            text = input("Escribe el nombre o parte del nombre de la tarea: ")
+            search_tasks(tasks, text)
+
+        elif option == "6":
             save_tasks(tasks)
             print("¡Hasta luego!")
             break
