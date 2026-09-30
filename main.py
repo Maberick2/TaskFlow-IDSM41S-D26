@@ -3,6 +3,7 @@ from tasks import (
     list_tasks,
     complete_task,
     delete_task,
+    edit_task,
     search_tasks
 )
 from storage import load_tasks, save_tasks
@@ -24,7 +25,7 @@ def main():
             continue
 
         #  Validar rango de opciones
-        if option not in ["1", "2", "3", "4", "5", "6"]:
+        if option not in ["1", "2", "3", "4", "5", "6", "7"]:
             print("Error: Opción fuera de rango.")
             continue
 
@@ -37,12 +38,9 @@ def main():
             list_tasks(tasks)
 
         elif option == "3":
-            try:
-                task_id = int(input("ID de la tarea a completar: ").strip())
-                complete_task(tasks, task_id)
-                save_tasks(tasks)
-            except ValueError:
-                print("ID inválido. Debe ser un número.")
+           task_id = input("ID de la tarea a completar: ").strip()
+           complete_task(tasks, task_id)
+           save_tasks(tasks)
 
         elif option == "4":
             try:
@@ -51,12 +49,20 @@ def main():
                 save_tasks(tasks)
             except ValueError:
                 print("ID inválido. Debe ser un número.")
-
         elif option == "5":
+            try:
+                task_id = int(input("ID de la tarea a editar: ").strip())
+                new_title = input("Nuevo nombre de la tarea: ").strip()
+                edit_task(tasks, task_id, new_title)
+                save_tasks(tasks)
+            except ValueError:
+                print("ID inválido. Debe ser un número.")
+
+        elif option == "6":
             text = input("Escribe el nombre o parte del nombre de la tarea: ")
             search_tasks(tasks, text)
 
-        elif option == "6":
+        elif option == "7":
             save_tasks(tasks)
             print("¡Hasta luego!")
             break
