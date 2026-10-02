@@ -132,10 +132,8 @@ def complete_task(tasks, task_id):
 
 def delete_task(tasks, task_id):
     """
-    Elimina una tarea de la lista.
-
-    Valida el ID, solicita confirmación y reorganiza los IDs
-    después de eliminar una tarea.
+    Elimina una tarea de la lista mediante su ID.
+    Valida el ID, solicita confirmación y reorganiza los IDs.
     """
     task_id = validar_task_id(task_id)
 
@@ -144,7 +142,6 @@ def delete_task(tasks, task_id):
 
     for task in tasks:
         if task[KEY_ID] == task_id:
-
             confirm = input(
                 f"¿Seguro que deseas eliminar "
                 f"'{task[KEY_TITLE]}'? (s/n): "
@@ -162,7 +159,7 @@ def delete_task(tasks, task_id):
             print("✅ Tarea eliminada")
             return True
 
-    print("❌ Error: ID no encontrado")
+    print("❌ Error: No se encontró una tarea con ese ID")
     return False
 
 
@@ -229,3 +226,4 @@ def filter_tasks_by_status(tasks, completed):
         return
 
     list_tasks(tareas_filtradas)
+main
